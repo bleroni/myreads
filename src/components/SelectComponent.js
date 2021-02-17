@@ -8,9 +8,7 @@ class SelectComponent extends Component {
             alert('Action not executed. Every book has to belong to at least one shelf.');
             return;
         }
-        // alert(event.target.value);
-        // console.log('calling elvis...')
-        this.props.onChangeShelf(this.props.bookDetails.id, selectedShelf)
+        this.props.onChangeShelf(this.props.bookDetails, selectedShelf)
     }
     render() {
         return (

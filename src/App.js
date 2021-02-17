@@ -28,8 +28,29 @@ class BooksApp extends React.Component {
       })
   }
 
-  handleShelfChange = (bookId, newShelf) => {
-    alert('changing shelf in App Component...' + bookId + ' --- ' + newShelf)
+  handleShelfChange = (book, newShelf) => {
+    let books = this.state.books;
+    // update the change of shelf for selected book
+    BooksAPI.update(book, newShelf)
+      .then((resp) => {
+        // Use the response from PUT /books/bookId to update current books in state, without needing to make the BooksAPI.getAll() call
+        Object.keys(resp).forEach(shelfId => {
+          console.log(shelfId);
+          resp[shelfId].forEach(bookId => {
+            // console.log(bookId)
+            for (var i = 0; i < books.length; i++) {
+              // console.log(resp[shelfId][i])
+              if (books[i].id === bookId) {
+                books[i].shelf = shelfId;
+                return;
+              }
+            }
+          })
+        }
+        )
+        // update the state with the new books array 
+        this.setState({ books })
+      })
   }
 
   render() {
