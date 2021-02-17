@@ -13,7 +13,7 @@ class BookShelfHolder extends Component {
                 <div className="list-books-content">
                     <div>
                         {this.props.shelves.map((shelf) => {
-                            return <BookShelf onChangeShelf={this.props.onChangeShelf} books={this.props.books.filter(book => book.shelf === shelf.id)} title={shelf.title} shelves={this.props.shelves} />
+                            return <BookShelf key={shelf.id} onChangeShelf={this.props.onChangeShelf} books={this.props.books.filter(book => book.shelf === shelf.id)} title={shelf.title} shelves={this.props.shelves} />
                         })}
 
                     </div>
