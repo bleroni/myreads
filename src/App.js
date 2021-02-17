@@ -18,11 +18,18 @@ class BooksApp extends React.Component {
   }
 
   componentDidMount() {
+    this.fetchAllBooks();
+  }
+
+  fetchAllBooks() {
     BooksAPI.getAll()
       .then((books) => {
         this.setState({ books })
       })
+  }
 
+  handleShelfChange = (bookId, newShelf) => {
+    alert('changing shelf in App Component...' + bookId + ' --- ' + newShelf)
   }
 
   render() {
@@ -56,9 +63,9 @@ class BooksApp extends React.Component {
               </div>
               <div className="list-books-content">
                 <div>
-                  <BookShelf books={this.state.books.filter(book => book.shelf === 'currentlyReading')} title={'Currently Reading'} shelves={this.shelves} />
-                  <BookShelf books={this.state.books.filter(book => book.shelf === 'wantToRead')} title={'Want to Read'} shelves={this.shelves} />
-                  <BookShelf books={this.state.books.filter(book => book.shelf === 'read')} title={'Read'} shelves={this.shelves} />
+                  <BookShelf onChangeShelf={this.handleShelfChange} books={this.state.books.filter(book => book.shelf === 'currentlyReading')} title={'Currently Reading'} shelves={this.shelves} />
+                  <BookShelf onChangeShelf={this.handleShelfChange} books={this.state.books.filter(book => book.shelf === 'wantToRead')} title={'Want to Read'} shelves={this.shelves} />
+                  <BookShelf onChangeShelf={this.handleShelfChange} books={this.state.books.filter(book => book.shelf === 'read')} title={'Read'} shelves={this.shelves} />
                 </div>
               </div>
               <div className="open-search">

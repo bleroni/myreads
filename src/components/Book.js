@@ -1,5 +1,5 @@
-import React, { Component } from 'react'
-import propTypes from 'prop-types'
+import React, { Component } from 'react';
+import propTypes from 'prop-types';
 import SelectComponent from './SelectComponent';
 
 class Book extends Component {
@@ -9,7 +9,7 @@ class Book extends Component {
                 <div className="book-top">
                     <div className="book-cover" style={{ width: 128, height: 192, backgroundImage: `url("${this.props.bookDetails.imageLinks.thumbnail}")` }}></div>
                     <div className="book-shelf-changer">
-                        <SelectComponent shelves={this.props.shelves} bookDetails={this.props.bookDetails} />
+                        <SelectComponent onChangeShelf={this.props.onChangeShelf} shelves={this.props.shelves} bookDetails={this.props.bookDetails} />
                     </div>
                 </div>
                 <div className="book-title">{this.props.bookDetails.title}</div>
@@ -25,6 +25,7 @@ class Book extends Component {
 
 Book.propTypes = {
     bookDetails: propTypes.object.isRequired,
+    onChangeShelf: propTypes.func.isRequired
 }
 
 export default Book;

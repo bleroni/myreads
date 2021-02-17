@@ -3,13 +3,14 @@ import propTypes from 'prop-types';
 
 class SelectComponent extends Component {
     handleOnChange = (event) => {
-        const selectedField = event.target.value;
-        if (selectedField === 'none') {
+        const selectedShelf = event.target.value;
+        if (selectedShelf === 'none') {
             alert('Action not executed. Every book has to belong to at least one shelf.');
             return;
         }
-        alert(event.target.value);
-        console.log('calling elvis...')
+        // alert(event.target.value);
+        // console.log('calling elvis...')
+        this.props.onChangeShelf(this.props.bookDetails.id, selectedShelf)
     }
     render() {
         return (
@@ -26,6 +27,7 @@ class SelectComponent extends Component {
 
 SelectComponent.propTypes = {
     bookDetails: propTypes.object.isRequired,
+    onChangeShelf: propTypes.func.isRequired,
 }
 
 export default SelectComponent;
