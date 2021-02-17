@@ -4,7 +4,7 @@ import BookShelfHolder from './components/BookShelfHolder';
 import Search from './components/Search';
 import * as BooksAPI from './BooksAPI'
 import './App.css'
-import BookShelf from './components/BookShelf';
+
 
 class BooksApp extends React.Component {
   constructor(props) {
@@ -59,9 +59,26 @@ class BooksApp extends React.Component {
   render() {
     return (
       <div className="app">
-        <BookShelfHolder books={this.state.books} onChangeShelf={this.handleShelfChange} shelves={this.shelves} />
-        <Search books={this.state.books} onChangeShelf={this.handleShelfChange} />
+        <Router>
+          <Switch>
+            <Route
+              exact path='/'
+              render={() => (
+                <BookShelfHolder 
+                  books={this.state.books} 
+                  onChangeShelf={this.handleShelfChange} 
+                  shelves={this.shelves} 
+                />
+              )}
+            />
+            <Route path='/search' component={Search} />
+          </Switch>
 
+          {/* 
+           <BookShelfHolder books={this.state.books} onChangeShelf={this.handleShelfChange} shelves={this.shelves} />
+          <Search books={this.state.books} onChangeShelf={this.handleShelfChange} />
+          */}
+        </Router>
       </div>
     )
   }
