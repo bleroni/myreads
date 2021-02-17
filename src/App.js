@@ -4,6 +4,14 @@ import * as BooksAPI from './BooksAPI'
 import './App.css'
 
 class BooksApp extends React.Component {
+  constructor(props) {
+    super(props);
+    this.shelves = [
+      { id: 'currentlyReading', title: 'Currently Reading' },
+      { id: 'wantToRead', title: 'Want to Read' },
+      { id: 'read', title: 'Read' }
+    ];
+  }
   state = {
     books: [],
     showSearchPage: false
@@ -13,7 +21,6 @@ class BooksApp extends React.Component {
     BooksAPI.getAll()
       .then((books) => {
         this.setState({ books })
-        console.log('bleron:' + JSON.stringify(books[0].title))
       })
 
   }
@@ -49,9 +56,9 @@ class BooksApp extends React.Component {
               </div>
               <div className="list-books-content">
                 <div>
-                  <BookShelf books={this.state.books.filter(book => book.shelf === 'currentlyReading')} />
-                  <BookShelf books={this.state.books.filter(book => book.shelf === 'wantToRead')} title={'Want to Read'} />
-                  <BookShelf books={this.state.books.filter(book => book.shelf === 'read')} title={'Read'} />
+                  <BookShelf books={this.state.books.filter(book => book.shelf === 'currentlyReading')} title={'Currently Reading'} shelves={this.shelves} />
+                  <BookShelf books={this.state.books.filter(book => book.shelf === 'wantToRead')} title={'Want to Read'} shelves={this.shelves} />
+                  <BookShelf books={this.state.books.filter(book => book.shelf === 'read')} title={'Read'} shelves={this.shelves} />
                 </div>
               </div>
               <div className="open-search">

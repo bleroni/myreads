@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
+import SelectComponent from './SelectComponent';
+
 class Book extends Component {
     render() {
         return (
@@ -7,13 +9,7 @@ class Book extends Component {
                 <div className="book-top">
                     <div className="book-cover" style={{ width: 128, height: 192, backgroundImage: `url("${this.props.bookDetails.imageLinks.thumbnail}")` }}></div>
                     <div className="book-shelf-changer">
-                        <select>
-                            <option value="move" disabled>Move to...</option>
-                            <option value="currentlyReading">Currently Reading</option>
-                            <option value="wantToRead">Want to Read</option>
-                            <option value="read">Read</option>
-                            <option value="none">None</option>
-                        </select>
+                        <SelectComponent shelves={this.props.shelves} />
                     </div>
                 </div>
                 <div className="book-title">{this.props.bookDetails.title}</div>
