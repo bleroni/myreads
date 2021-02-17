@@ -1,5 +1,5 @@
 import React from 'react'
-import Book from './components/Book'
+import BookShelf from './components/BookShelf'
 import * as BooksAPI from './BooksAPI'
 import './App.css'
 
@@ -12,9 +12,8 @@ class BooksApp extends React.Component {
   componentDidMount() {
     BooksAPI.getAll()
       .then((books) => {
-        // alert(JSON.stringify(books))
         this.setState({ books })
-        return books;
+        console.log('bleron:' + JSON.stringify(books[0].title))
       })
 
   }
@@ -50,13 +49,11 @@ class BooksApp extends React.Component {
               </div>
               <div className="list-books-content">
                 <div>
+                  <BookShelf books={this.state.books} title={'Custom title'} shelf={'currentlyReading'} />
                   <div className="bookshelf">
                     <h2 className="bookshelf-title">Currently Reading</h2>
                     <div className="bookshelf-books">
                       <ol className="books-grid">
-                        <li>
-                          <Book />
-                        </li>
                         <li>
                           <div className="book">
                             <div className="book-top">
