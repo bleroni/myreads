@@ -35,7 +35,7 @@ class Search extends Component {
         if (currentQuery.length >= 3) {
             this.searchBooks(currentQuery);
         }
-        this.setState({ query: currentQuery, showNoResultsMessage: '' })
+        this.setState({ query: currentQuery, showNoResultsMessage: '', books: [] })
 
     }
     render() {
