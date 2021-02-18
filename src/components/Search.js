@@ -13,7 +13,10 @@ class Search extends Component {
     searchBooks(searchTerm) {
         BooksAPI.search(searchTerm)
             .then((books) => {
-                // console.log(this.props.books)
+                if (books.hasOwnProperty('error')) {
+                    alert('There was an error in response, empty query most likely.');
+                    return;
+                }
                 books.forEach(searchBook => {
                     this.props.books.forEach(shelfBook => {
                         if (shelfBook.id === searchBook.id) {
@@ -35,25 +38,28 @@ class Search extends Component {
     }
     render() {
         return (
-            <div className="search-books">
-                <div className="search-books-bar">
-                    <Link to='/'>
-                        <button className="close-search">Close</button>
-                    </Link>
-                    <div className="search-books-input-wrapper">
-                        <input type="text" placeholder="Search by title or author" value={this.state.query} onChange={(event) => this.handleChange(event)} />
+            <div className="list-books-content">
+                <div className="search-books">
+                    <div className="search-books-bar">
+                        <Link to='/'>
+                            <button className="close-search">Close</button>
+                        </Link>
+                        <div className="search-books-input-wrapper">
+                            <input type="text" placeholder="Search by title or author" value={this.state.query} onChange={(event) => this.handleChange(event)} />
 
+                        </div>
                     </div>
-                </div>
-                <div className="search-books-results">
-                    <ol className="books-grid"></ol>
-                    {this.state.books.length > 0 && this.state.books.map((book) => {
-                        return (
-                            <li key={book.id}>
-                                <Book bookDetails={book} shelves={this.props.shelves} onChangeShelf={this.props.onChangeShelf} />
-                            </li>
-                        )
-                    })}
+                    <div className="search-books-results">
+                        <ol className="books-grid">
+                            {this.state.books.length > 0 && this.state.books.map((book) => {
+                                return (
+                                    <li key={book.id}>
+                                        <Book bookDetails={book} shelves={this.props.shelves} onChangeShelf={this.props.onChangeShelf} />
+                                    </li>
+                                )
+                            })}
+                        </ol>
+                    </div>
                 </div>
             </div>
         )
