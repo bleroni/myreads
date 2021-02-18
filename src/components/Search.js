@@ -44,14 +44,9 @@ class Search extends Component {
         } else {
             this.setState({ showErrorMessage: 'No results found.', books: [] })
         }
-        //if (currentQuery.length >= 3) {
-        //    this.searchBooks(currentQuery);
-        //}
-        // this.setState({ query: currentQuery, showErrorMessage: '', books: [] })
+
         this.setState({ query: currentQuery })
-        //         if (this.state.searchTermsLowerCase.includes('money')) {
-        //    console.log(this.state.searchTermsLowerCase);
-        // }
+
 
     }
     render() {
