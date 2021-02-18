@@ -1,30 +1,26 @@
-import React, { Component } from 'react';
+import React from 'react';
 import propTypes from 'prop-types';
 import SelectComponent from './SelectComponent';
 
-class Book extends Component {
-
-    render() {
-
-        return (
-            <div className="book">
-                <div className="book-top">
-                    {this.props.bookDetails.imageLinks &&
-                        <div className="book-cover" style={{ width: 128, height: 192, backgroundImage: `url("${this.props.bookDetails.imageLinks.thumbnail}")` }}></div>
-                    }
-                    <div className="book-shelf-changer">
-                        <SelectComponent onChangeShelf={this.props.onChangeShelf} shelves={this.props.shelves} bookDetails={this.props.bookDetails} />
-                    </div>
-                </div>
-                <div className="book-title">{this.props.bookDetails.title}</div>
-                <div className="book-authors">
-                    {this.props.bookDetails.authors && this.props.bookDetails.authors.map((author) => {
-                        return `${author} `
-                    })}
+const Book = (props) => {
+    return (
+        <div className="book">
+            <div className="book-top">
+                {props.bookDetails.imageLinks &&
+                    <div className="book-cover" style={{ width: 128, height: 192, backgroundImage: `url("${props.bookDetails.imageLinks.thumbnail}")` }}></div>
+                }
+                <div className="book-shelf-changer">
+                    <SelectComponent onChangeShelf={props.onChangeShelf} shelves={props.shelves} bookDetails={props.bookDetails} />
                 </div>
             </div>
-        )
-    }
+            <div className="book-title">{props.bookDetails.title}</div>
+            <div className="book-authors">
+                {props.bookDetails.authors && props.bookDetails.authors.map((author) => {
+                    return `${author} `
+                })}
+            </div>
+        </div>
+    )
 }
 
 Book.propTypes = {
