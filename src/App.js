@@ -33,6 +33,11 @@ class BooksApp extends React.Component {
 
   handleShelfChange = (book, newShelf) => {
     let books = this.state.books;
+    // check if the book is in our shelves, if not, add it
+    const bookExists = books.filter(existingBook => existingBook.id === book.id)
+    if(bookExists.length === 0) {
+      books.push(book);
+    }
     // update the change of shelf for selected book
     BooksAPI.update(book, newShelf)
       .then((resp) => {
