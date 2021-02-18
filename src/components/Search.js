@@ -13,9 +13,15 @@ class Search extends Component {
     searchBooks(searchTerm) {
         BooksAPI.search(searchTerm)
             .then((books) => {
-                // alert(JSON.stringify(books));
+                // console.log(this.props.books)
+                books.forEach(searchBook => {
+                    this.props.books.forEach(shelfBook => {
+                        if (shelfBook.id === searchBook.id) {
+                            searchBook.shelf = shelfBook.shelf;
+                        }
+                    })
+                })
                 this.setState({ books })
-
             })
     }
 
