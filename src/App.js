@@ -16,8 +16,7 @@ class BooksApp extends React.Component {
     ];
   }
   state = {
-    books: [],
-    showSearchPage: false
+    books: []
   }
 
   componentDidMount() {
@@ -35,9 +34,9 @@ class BooksApp extends React.Component {
     let books = this.state.books;
     // check if the book is in our shelves, if not, add it
     const bookExists = books.filter(existingBook => existingBook.id === book.id)
-    if(bookExists.length === 0 && newShelf !== 'none') {
+    if (bookExists.length === 0 && newShelf !== 'none') {
       books.push(book);
-    } else if(bookExists.length === 1 && newShelf === 'none') {
+    } else if (bookExists.length === 1 && newShelf === 'none') {
       books = books.filter(existingBook => existingBook.id !== book.id)
     }
     // update the change of shelf for selected book
