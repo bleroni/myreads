@@ -38,7 +38,6 @@ class BooksApp extends React.Component {
       .then((resp) => {
         // Use the response from PUT /books/bookId to update current books in state, without needing to make the BooksAPI.getAll() call
         Object.keys(resp).forEach(shelfId => {
-          console.log(shelfId);
           resp[shelfId].forEach(bookId => {
             // console.log(bookId)
             for (var i = 0; i < books.length; i++) {
@@ -61,23 +60,30 @@ class BooksApp extends React.Component {
       <div className="app">
         <Router>
           <Switch>
+
             <Route
               exact path='/'
               render={() => (
-                <BookShelfHolder 
-                  books={this.state.books} 
-                  onChangeShelf={this.handleShelfChange} 
-                  shelves={this.shelves} 
+                <BookShelfHolder
+                  books={this.state.books}
+                  onChangeShelf={this.handleShelfChange}
+                  shelves={this.shelves}
                 />
               )}
             />
-            <Route path='/search' component={Search} />
-          </Switch>
 
-          {/* 
-           <BookShelfHolder books={this.state.books} onChangeShelf={this.handleShelfChange} shelves={this.shelves} />
-          <Search books={this.state.books} onChangeShelf={this.handleShelfChange} />
-          */}
+            <Route
+              path='/search'
+              render={() => (
+                <Search
+                  books={this.state.books}
+                  onChangeShelf={this.handleShelfChange}
+                  shelves={this.shelves}
+                />
+              )}
+            />
+
+          </Switch>
         </Router>
       </div>
     )
