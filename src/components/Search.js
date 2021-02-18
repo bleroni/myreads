@@ -55,8 +55,8 @@ class Search extends Component {
             <div className="list-books-content">
                 <div className="search-books">
                     <div className="search-books-bar">
-                        <Link to='/'>
-                            <button className="close-search">Close</button>
+                        <Link to='/' className="close-search">
+                            Close
                         </Link>
                         <div className="search-books-input-wrapper">
                             <input type="text" placeholder="Search by title or author" value={this.state.query} onChange={(event) => this.handleChange(event)} />

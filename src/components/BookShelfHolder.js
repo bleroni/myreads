@@ -20,7 +20,7 @@ class BookShelfHolder extends Component {
                 </div>
                 <div className="open-search">
                     <Link to="/search">
-                        <button>Add a book</button>
+                        Add a book
                     </Link>
                 </div>
             </div>
