@@ -7,14 +7,16 @@ import Book from './Book'
 class Search extends Component {
     state = {
         query: '',
-        books: []
+        books: [],
+        showNoResultsMessage: ''
     }
 
     searchBooks(searchTerm) {
         BooksAPI.search(searchTerm)
             .then((books) => {
                 if (books.hasOwnProperty('error')) {
-                    alert('There was an error in response, empty query most likely.');
+                    // alert('There was an error in response, empty query most likely.');
+                    this.setState({showNoResultsMessage: 'No results found.'})
                     return;
                 }
                 books.forEach(searchBook => {
@@ -33,7 +35,7 @@ class Search extends Component {
         if (currentQuery.length >= 3) {
             this.searchBooks(currentQuery);
         }
-        this.setState({ query: currentQuery })
+        this.setState({ query: currentQuery, showNoResultsMessage: '' })
 
     }
     render() {
@@ -50,6 +52,9 @@ class Search extends Component {
                         </div>
                     </div>
                     <div className="search-books-results">
+                        {this.state.showNoResultsMessage.length > 0 &&
+                            <h3>{this.state.showNoResultsMessage}</h3> 
+                        }
                         <ol className="books-grid">
                             {this.state.books.length > 0 && this.state.books.map((book) => {
                                 return (
