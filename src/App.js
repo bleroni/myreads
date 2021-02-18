@@ -2,12 +2,9 @@ import React from 'react'
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import BookShelfHolder from './components/BookShelfHolder';
 import Search from './components/Search';
+import GenericNotFound from './components/GenericNotFound'
 import * as BooksAPI from './BooksAPI'
 import './App.css'
-
-const GenericNotFound = () => {
-  return <h5 className="route-not-found">Route not found</h5>
-}
 
 class BooksApp extends React.Component {
   constructor(props) {
@@ -80,11 +77,11 @@ class BooksApp extends React.Component {
 
 
             <Route path='/search'>
-            <Search
-              books={this.state.books}
-              onChangeShelf={this.handleShelfChange}
-              shelves={this.shelves}
-            />
+              <Search
+                books={this.state.books}
+                onChangeShelf={this.handleShelfChange}
+                shelves={this.shelves}
+              />
             </Route>
 
             <Route component={GenericNotFound} />
