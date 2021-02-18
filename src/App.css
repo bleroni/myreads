@@ -75,6 +75,11 @@ body, .app {
 
 /* search page */
 
+.search-books {
+  text-align: center;
+  padding: 0 10px 20px;
+}
+
 .search-books-bar {
   position: fixed;
   width: 100%;
@@ -120,6 +125,8 @@ button:active {
 
 .search-books-results {
   padding: 80px 10px 20px;
+  text-align: left;
+
 }
 
 /* books grid */
