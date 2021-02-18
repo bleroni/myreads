@@ -6,9 +6,12 @@ const Book = (props) => {
     return (
         <div className="book">
             <div className="book-top">
-                {props.bookDetails.imageLinks &&
-                    <div className="book-cover" style={{ width: 128, height: 192, backgroundImage: `url("${props.bookDetails.imageLinks.thumbnail}")` }}></div>
-                }
+                <div className="book-cover"
+                    style={{
+                        width: 128, height: 192, backgroundImage:
+                            `url(${props.bookDetails.imageLinks && props.bookDetails.imageLinks.thumbnail ? `${props.bookDetails.imageLinks.thumbnail}`:`http://via.placeholder.com/128x193?text=No%20Cover`})`
+                    }}>
+                </div>
                 <div className="book-shelf-changer">
                     <SelectComponent onChangeShelf={props.onChangeShelf} shelves={props.shelves} bookDetails={props.bookDetails} />
                 </div>
