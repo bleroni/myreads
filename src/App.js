@@ -36,7 +36,9 @@ class BooksApp extends React.Component {
     const bookExists = books.filter(existingBook => existingBook.id === book.id)
     if (bookExists.length === 0 && newShelf !== 'none') {
       books.push(book);
-    } else if (bookExists.length === 1 && newShelf === 'none') {
+    }
+    // If book exists and new shelf is none, remove it from existing books
+    else if (bookExists.length === 1 && newShelf === 'none') {
       books = books.filter(existingBook => existingBook.id !== book.id)
     }
     // update the change of shelf for selected book
