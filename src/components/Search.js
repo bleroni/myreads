@@ -47,7 +47,6 @@ class Search extends Component {
 
         this.setState({ query: currentQuery })
 
-
     }
     render() {
 

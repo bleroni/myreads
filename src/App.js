@@ -67,26 +67,23 @@ class BooksApp extends React.Component {
         <Router>
           <Switch>
 
-            <Route
-              exact path='/'
-              render={() => (
-                <BookShelfHolder
-                  books={this.state.books}
-                  onChangeShelf={this.handleShelfChange}
-                  shelves={this.shelves}
-                />
-              )}
+            <Route exact path='/'></Route>
+            <BookShelfHolder
+              books={this.state.books}
+              onChangeShelf={this.handleShelfChange}
+              shelves={this.shelves}
+            />
+            <Route />
+
             />
 
-            <Route
-              path='/search'
-              render={() => (
-                <Search
-                  books={this.state.books}
-                  onChangeShelf={this.handleShelfChange}
-                  shelves={this.shelves}
-                />
-              )}
+            <Route path='/search'></Route>
+            <Search
+              books={this.state.books}
+              onChangeShelf={this.handleShelfChange}
+              shelves={this.shelves}
+            />
+            <Route />
             />
 
           </Switch>
