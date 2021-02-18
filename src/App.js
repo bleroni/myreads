@@ -35,8 +35,10 @@ class BooksApp extends React.Component {
     let books = this.state.books;
     // check if the book is in our shelves, if not, add it
     const bookExists = books.filter(existingBook => existingBook.id === book.id)
-    if(bookExists.length === 0) {
+    if(bookExists.length === 0 && newShelf !== 'none') {
       books.push(book);
+    } else if(bookExists.length === 1 && newShelf === 'none') {
+      books = books.filter(existingBook => existingBook.id !== book.id)
     }
     // update the change of shelf for selected book
     BooksAPI.update(book, newShelf)
@@ -44,9 +46,7 @@ class BooksApp extends React.Component {
         // Use the response from PUT /books/bookId to update current books in state, without needing to make the BooksAPI.getAll() call
         Object.keys(resp).forEach(shelfId => {
           resp[shelfId].forEach(bookId => {
-            // console.log(bookId)
             for (var i = 0; i < books.length; i++) {
-              // console.log(resp[shelfId][i])
               if (books[i].id === bookId) {
                 books[i].shelf = shelfId;
                 return;
