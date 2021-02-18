@@ -5,6 +5,9 @@ import Search from './components/Search';
 import * as BooksAPI from './BooksAPI'
 import './App.css'
 
+const GenericNotFound = () => {
+  return <h5 className="route-not-found">Route not found</h5>
+}
 
 class BooksApp extends React.Component {
   constructor(props) {
@@ -67,24 +70,24 @@ class BooksApp extends React.Component {
         <Router>
           <Switch>
 
-            <Route exact path='/'></Route>
-            <BookShelfHolder
-              books={this.state.books}
-              onChangeShelf={this.handleShelfChange}
-              shelves={this.shelves}
-            />
-            <Route />
+            <Route exact path='/'>
+              <BookShelfHolder
+                books={this.state.books}
+                onChangeShelf={this.handleShelfChange}
+                shelves={this.shelves}
+              />
+            </Route>
 
-            />
 
-            <Route path='/search'></Route>
+            <Route path='/search'>
             <Search
               books={this.state.books}
               onChangeShelf={this.handleShelfChange}
               shelves={this.shelves}
             />
-            <Route />
-            />
+            </Route>
+
+            <Route component={GenericNotFound} />
 
           </Switch>
         </Router>

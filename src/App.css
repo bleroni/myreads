@@ -203,3 +203,7 @@ button:active {
   text-align: center;
   font-size: 0.8em;
 }
+
+.route-not-found {
+  margin:30px;
+}
