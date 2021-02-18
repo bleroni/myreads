@@ -3,12 +3,16 @@ import { Link } from 'react-router-dom';
 import propTypes from 'prop-types';
 import * as BooksAPI from '../BooksAPI'
 import Book from './Book'
+// var data = require('../../file.json'); 
+const searchTerms = require('../SEARCH_TERMS.json');
+const searchTermsLowerCase = searchTerms.map(term => term.toLowerCase())
 
 class Search extends Component {
     state = {
         query: '',
         books: [],
-        showNoResultsMessage: ''
+        showErrorMessage: '',
+        searchTermsLowerCase
     }
 
     searchBooks(searchTerm) {
@@ -16,7 +20,7 @@ class Search extends Component {
             .then((books) => {
                 if (books.hasOwnProperty('error')) {
                     // alert('There was an error in response, empty query most likely.');
-                    this.setState({showNoResultsMessage: 'No results found.'})
+                    this.setState({ showNoResultsMessage: 'No results found.' })
                     return;
                 }
                 books.forEach(searchBook => {
@@ -32,13 +36,27 @@ class Search extends Component {
 
     handleChange(event) {
         const currentQuery = event.target.value;
-        if (currentQuery.length >= 3) {
+        if (this.state.searchTermsLowerCase.includes(currentQuery.toLowerCase())) {
             this.searchBooks(currentQuery);
+            this.setState({ showErrorMessage: '' })
+        } else if (currentQuery === '') {
+            this.setState({ books: [] })
+        } else {
+            this.setState({ showErrorMessage: 'No results found.', books: [] })
         }
-        this.setState({ query: currentQuery, showNoResultsMessage: '', books: [] })
+        //if (currentQuery.length >= 3) {
+        //    this.searchBooks(currentQuery);
+        //}
+        // this.setState({ query: currentQuery, showErrorMessage: '', books: [] })
+        this.setState({ query: currentQuery })
+        //         if (this.state.searchTermsLowerCase.includes('money')) {
+        //    console.log(this.state.searchTermsLowerCase);
+        // }
 
     }
     render() {
+
+
         return (
             <div className="list-books-content">
                 <div className="search-books">
@@ -52,8 +70,9 @@ class Search extends Component {
                         </div>
                     </div>
                     <div className="search-books-results">
-                        {this.state.showNoResultsMessage.length > 0 &&
-                            <h3>{this.state.showNoResultsMessage}</h3> 
+
+                        {this.state.showErrorMessage.length > 0 &&
+                            <h3>{this.state.showErrorMessage}</h3>
                         }
                         <ol className="books-grid">
                             {this.state.books.length > 0 && this.state.books.map((book) => {
